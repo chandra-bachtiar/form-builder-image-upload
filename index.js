@@ -15,6 +15,8 @@ app.use(fileUpload());
 app.use(express.static('public'));
 
 // API untuk upload file gambar
+api.get('/', (req, res) => { res.send('Website Bekerja Dengan Baik') });
+
 app.post('/upload', (req, res) => {
     try {
         //get apikey from query string
