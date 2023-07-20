@@ -5,9 +5,11 @@ const fs = require('fs-extra');
 const fileUpload = require('express-fileupload');
 const path = require('path');
 const dotenv = require('dotenv');
+const cors = require('cors');
 dotenv.config();
 
 const app = express();
+app.use(cors())
 app.use(express.json());
 app.use(fileUpload());
 app.use(express.static('public'));
@@ -49,6 +51,7 @@ app.post('/upload', (req, res) => {
         //write code to save the file
         fs.writeFile('./public/uploads/' + fileName + '.' + extension, req.files.image.data, (err) => {
             if (err) {
+                console.log(err);
                 res.status(500).json({ message: 'Error saving the file!' });
             } else {
                 res.json({ message: 'File saved successfully' });
