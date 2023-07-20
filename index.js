@@ -17,13 +17,11 @@ app.use(express.static('public'));
 // API untuk upload file gambar
 app.post('/upload', (req, res) => {
     try {
-        if (!req.headers['x-apikey']) {
-            res.status(401).json({ message: 'Please provide an API key!' });
-            return;
-        }
+        //get apikey from query string
+        const apiKey = req.query.apikey || "";
 
         //check if apikey is correct
-        if (req.headers['x-apikey'] !== process.env.APIKEY) {
+        if (apiKey !== process.env.APIKEY) {
             res.status(401).json({ message: 'Invalid API key!' });
             return;
         }
